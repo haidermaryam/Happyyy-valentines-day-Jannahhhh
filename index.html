@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💖</title>
+
+<!-- ROMANTIC FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Dancing Script', cursive;
+   background:linear-gradient(135deg,#ffe6ef,#ffd1dc);
+  color:rgb(215, 73, 97);
+  text-align:center;
+  overflow:hidden;
+}
+
+/* SECTIONS */
+.section{
+  position:absolute;
+  inset:0;
+  padding:60px 20px;
+  display:none;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+.section.active{
+  display:block;
+  opacity:1;
+}
+
+/* BUTTONS */
+button{
+  padding:14px 36px;
+  font-family:'Courier New', Courier, monospace;
+  font-size:22px;
+  border:none;
+  border-radius:40px;
+  background:#ff2e63;
+  color:white;
+  margin-top:30px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* INPUT */
+input{
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  font-size:20px;
+  outline:none;
+  text-align:center;
+}
+
+/* WRONG PASSWORD MESSAGE */
+#error{
+  margin-top:20px;
+  color:#ab3653;
+  font-size:22px;
+  display:none;
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* TYPING */
+#typing{font-size:26px;max-width:720px;margin:auto;line-height:1.5}
+
+/* GALLERY */
+.gallery img{
+  width:180px;
+  border-radius:20px;
+  margin:10px;
+}
+
+/* SECRET */
+#secret{
+  display:none;
+  margin-top:30px;
+  font-size:26px;
+  background:rgba(0,0,0,0.25);
+  padding:25px;
+  border-radius:25px;
+}
+
+/* MUSIC BUTTON */
+#musicBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#ffd1dc;
+  color:#b0003a;
+  border:none;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:26px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div class="section active" id="s1">
+  <h1>Jannnahhhhhhhhh💖</h1>
+  <p>Password likho, meri Gurriya 🌸</p>
+  <input id="pass" type="password" placeholder="Enter Password😘😘❤️ ">
+  <div id="error">Galat password… phir se koshish karo 💔 Bhoolll bhiii gayinnnnnn Apkaa pyaarr kamm horahaa hyyy begummmm 👉🏻👈🏻😔😔😔😔</div>
+  <br>
+  <button onclick="check()">Enter Gurriya ✨</button>
+</div>
+
+<!-- MESSAGE 1 -->
+<div class="section" id="s2">
+  <h1>Happyyyyy Valentineeee’sss Dayyyy Jannnahhhhhhhhh💖💕</h1>
+  <p id="typing"></p>
+  <button onclick="next(3)">Aage chaleinn Gurriyaa🌙</button>
+</div>
+
+<!-- MESSAGE 2 -->
+<div class="section" id="s3">
+  <h1>Ek Baat 💖</h1>
+  <p style="font-size:26px">
+    Apkii muskurahat iss jahann mein mujyyy sabb syy zayadaaa qeemtiii hyy😚  
+    Aur Asss youu knowww Apkaa khayaall.... Meriiii Adatttt🌸
+  </p>
+  <button onclick="next(4)">Aur bhi hai😘😘❤️</button>
+</div>
+
+<!-- PHOTOS -->
+<div class="section" id="s4">
+  <h1>Ourr Memoriesss Jannnahhhhhhhhh💖</h1>
+  <div class="gallery">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+    <img src="photo5.jpg">
+    <img src="photo6.jpg">
+    <img src="photo7.jpg">
+    <img src="photo8.jpg">
+  </div>
+  <button onclick="next(5)">Aakhri baat 💌</button>
+</div>
+
+<!-- FINAL -->
+<div class="section" id="s5">
+  <h1>Hamesha 💞</h1>
+  <p style="font-size:26px">
+    Yeh sirf ek page nahi…  
+    yeh mera wada hai 🌙
+  </p>
+  <button onclick="reveal()">Dil ki baat 🤍</button>
+
+  <div id="secret">
+    App Meriii Zindagii ka 
+    sab syy khoobsuratt hissaaaa hynnn😚😚😚😚😚  
+    <br>
+    hamarii bohott larraiyann hoyinn unkiii wajhha yehii thii menay zyadaa expect karr liyaaaa  tha parrr abb mujhyyy realize hoa hy kyy Apkoo pyarrr karnaa sabb syyy zyaddaa zaroorii hyyy orr kuchhh nahiii 
+    I LOVEEEEE YOUHHHHHHH Jannnahhhhhhhhh💖💕 and wadda kartaa hon kabhiii bhii kuchh bhii nahii kahonn gaa😚😚😚
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+//<button id="musicBtn" onclick="playMusic()">🎵</button>
+
+<script>
+/* PASSWORD CHECK */
+function check(){
+  const pass=document.getElementById("pass");
+  const error=document.getElementById("error");
+  const value=pass.value.trim().toLowerCase();
+
+  if(value.startsWith("gurriya") || value.startsWith("guriya")){
+    error.style.display="none";
+    next(2);
+    typeText();
+  }else{
+    error.style.display="block";
+    pass.style.animation="shake 0.4s";
+    pass.addEventListener("animationend",()=>pass.style.animation="");
+  }
+}
+
+/* SECTION CHANGE */
+function next(n){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById("s"+n).classList.add("active");
+}
+
+/* TYPING EFFECT */
+let text="Main lafzon se zyada tumhein samajhta hoon… kyun ke tum sirf ek din nahi, har din special ho meri Gurriya 💖✨";
+let i=0;
+function typeText(){
+  const el=document.getElementById("typing");
+  el.innerHTML="";
+  i=0;
+  function t(){
+    if(i<text.length){
+      el.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(t,60);
+    }
+  }
+  t();
+}
+
+/* SECRET */
+function reveal(){
+  document.getElementById("secret").style.display="block";
+}
+
+/* HEARTS */
+function heart(){
+  let h=document.createElement("div");
+  h.className="heart";
+  const emojis = ["😘","❤️","😋","😚"];
+  h.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+}
+setInterval(heart,300);
+
+/* MUSIC (CHROME SAFE) */
+function playMusic(){
+  const music=document.getElementById("bgMusic");
+  music.play();
+}
+</script>
+
+</body>
+</html>
