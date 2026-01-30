@@ -7,61 +7,86 @@
 <!-- ROMANTIC FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box; margin:0; padding:0;}
 
 body{
-  margin:0;
   font-family:'Dancing Script', cursive;
-   background:linear-gradient(135deg,#ffe6ef,#ffd1dc);
+  background:linear-gradient(135deg,#ffe6ef,#ffd1dc);
   color:rgb(215, 73, 97);
   text-align:center;
   overflow:hidden;
+  height:100vh;
 }
 
 /* SECTIONS */
 .section{
   position:absolute;
   inset:0;
-  padding:60px 20px;
+  padding:40px 15px;
   display:none;
   opacity:0;
   transition:opacity 1s ease;
+  font-size:calc(16px + 1vw);
 }
 .section.active{
   display:block;
   opacity:1;
 }
+.section h1{
+  font-size:calc(24px + 4vw);
+  line-height:1.2;
+}
+.section p, #typing, #secret{
+  font-size:calc(16px + 2vw);
+  line-height:1.5;
+}
 
 /* BUTTONS */
 button{
-  padding:14px 36px;
-  font-family:'Courier New', Courier, monospace;
-  font-size:22px;
+  width:70vw;
+  max-width:300px;
+  padding:14px 0;
+  font-size:20px;
   border:none;
-  border-radius:40px;
+  border-radius:35px;
   background:#ff2e63;
   color:white;
-  margin-top:30px;
+  margin-top:20px;
   cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+button:active{
+  transform: scale(0.95);
 }
 
 /* INPUT */
 input{
-  padding:14px;
+  width:80vw;
+  max-width:300px;
+  padding:14px 20px;
   border-radius:30px;
   border:none;
-  font-size:20px;
+  font-size:18px;
   outline:none;
   text-align:center;
+  background:rgba(255,255,255,0.25);
+  color:white;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  margin-top:15px;
+}
+input::placeholder{
+  font-family:;
 }
 
 /* WRONG PASSWORD MESSAGE */
 #error{
-  margin-top:20px;
+  margin-top:15px;
   color:#ab3653;
-  font-size:22px;
+  font-size:20px;
   display:none;
 }
 
@@ -74,51 +99,96 @@ input{
   100%{transform:translateX(0)}
 }
 
-/* HEARTS */
+/* HEARTS / PETALS / SPARKLE RAIN */
 .heart{
   position:fixed;
   top:-10px;
-  font-size:20px;
+  font-size:16px;
   animation:fall linear infinite;
+  pointer-events:none;
+  opacity:0.8;
+  z-index:0; /* behind text */
 }
 @keyframes fall{
-  to{transform:translateY(110vh);}
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:0;}
+  20% { opacity:1; }
+  50% { transform: translateY(50vh) translateX(20px) rotate(15deg); }
+  100%{ transform: translateY(110vh) translateX(-20px) rotate(-10deg); opacity:0;}
 }
 
 /* TYPING */
-#typing{font-size:26px;max-width:720px;margin:auto;line-height:1.5}
+#typing{
+  font-size:calc(16px + 2vw);
+  max-width:90%;
+  margin:auto;
+  line-height:1.5;
+  z-index:1;
+  position:relative;
+}
 
 /* GALLERY */
 .gallery img{
-  width:180px;
-  border-radius:20px;
-  margin:10px;
+  width:40vw;
+  max-width:180px;
+  border-radius:18px;
+  margin:8px;
+  z-index:1;
 }
 
 /* SECRET */
 #secret{
   display:none;
-  margin-top:30px;
-  font-size:26px;
-  background:rgba(0,0,0,0.25);
-  padding:25px;
-  border-radius:25px;
+  margin-top:20px;
+  font-size:calc(16px + 2vw);
+  background:rgba(0,0,0,0.2);
+  padding:20px;
+  border-radius:20px;
+  z-index:1;
 }
 
-/* MUSIC BUTTON */
-#musicBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#ffd1dc;
-  color:#b0003a;
-  border:none;
-  border-radius:50%;
-  width:60px;
-  height:60px;
-  font-size:26px;
-  cursor:pointer;
+/* FADE TRANSITION FOR SECTIONS */
+.section {
+  transition: opacity 1s ease-in-out;
 }
+/* FULLSCREEN PHOTO OVERLAY */
+#photoOverlay {
+  position: fixed;
+  top:0; left:0;
+  width:100vw;
+  height:100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  z-index: 999;
+}
+
+#photoOverlay img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transform: scale(0.8);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity:0;
+}
+
+#photoOverlay.show img {
+  transform: scale(1);
+  opacity:1;
+}
+
+#closeOverlay {
+  position: absolute;
+  top:20px;
+  right:20px;
+  font-size:40px;
+  color:white;
+  cursor:pointer;
+  user-select:none;
+  z-index:1000;
+}
+
 </style>
 </head>
 
@@ -126,9 +196,9 @@ input{
 
 <!-- PASSWORD -->
 <div class="section active" id="s1">
-  <h1>Jannnahhhhhhhhh💖</h1>
+  <h1>Jannnahhhhh 💖</h1>
   <p>Password likho, meri Gurriya 🌸</p>
-  <input id="pass" type="password" placeholder="Enter Password😘😘❤️ ">
+  <input id="pass" type="password" placeholder="Enter Password😘❤️">
   <div id="error">Galat password… phir se koshish karo 💔 Bhoolll bhiii gayinnnnnn Apkaa pyaarr kamm horahaa hyyy begummmm 👉🏻👈🏻😔😔😔😔</div>
   <br>
   <button onclick="check()">Enter Gurriya ✨</button>
@@ -155,24 +225,33 @@ input{
 <div class="section" id="s4">
   <h1>Ourr Memoriesss Jannnahhhhhhhhh💖</h1>
   <div class="gallery">
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
-    <img src="photo6.jpg">
-    <img src="photo7.jpg">
-    <img src="photo8.jpg">
+    <img src="photo1.jpg" alt="Memory 1">
+    <img src="photo2.jpg" alt="Memory 2">
+    <img src="photo3.jpg" alt="Memory 3">
+    <img src="photo4.jpg" alt="Memory 4">
+    <img src="photo5.jpg" alt="Memory 5">
+    <img src="photo6.jpg" alt="Memory 6">
+    <img src="photo7.jpg" alt="Memory 7">
+    <img src="photo8.jpg" alt="Memory 8">
+    <!-- Add more photos here -->
+    <img src="myphoto.jpg" alt="Special moment">
   </div>
   <button onclick="next(5)">Aakhri baat 💌</button>
 </div>
+
+<!-- FULLSCREEN PHOTO OVERLAY -->
+<div id="photoOverlay" style="display:none;">
+  <span id="closeOverlay">&times;</span>
+  <img id="overlayImg" src="">
+</div>
+
 
 <!-- FINAL -->
 <div class="section" id="s5">
   <h1>Hamesha 💞</h1>
   <p style="font-size:26px">
     Yeh sirf ek page nahi…  
-    yeh mera wada hai 🌙
+    yeh mera wadaa hai Jannnahhhhhhhhh💖🌙
   </p>
   <button onclick="reveal()">Dil ki baat 🤍</button>
 
@@ -189,23 +268,23 @@ input{
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-//<button id="musicBtn" onclick="playMusic()">🎵</button>
 
 <script>
 /* PASSWORD CHECK */
 function check(){
-  const pass=document.getElementById("pass");
-  const error=document.getElementById("error");
-  const value=pass.value.trim().toLowerCase();
+  const pass = document.getElementById("pass");
+  const error = document.getElementById("error");
+  const value = pass.value.trim().toLowerCase();
 
   if(value.startsWith("gurriya") || value.startsWith("guriya")){
+    document.getElementById("bgMusic").play();
     error.style.display="none";
     next(2);
     typeText();
-  }else{
+  } else {
     error.style.display="block";
     pass.style.animation="shake 0.4s";
-    pass.addEventListener("animationend",()=>pass.style.animation="");
+    pass.addEventListener("animationend", ()=>pass.style.animation="");
   }
 }
 
@@ -216,7 +295,7 @@ function next(n){
 }
 
 /* TYPING EFFECT */
-let text="Main lafzon se zyada tumhein samajhta hoon… kyun ke tum sirf ek din nahi, har din special ho meri Gurriya 💖✨";
+let text="Main ne lafzonn se zyada waqt diya… kyun ke Appp sirf ek din nahi, har din special hainn Meryy liyee Gurriyaaaa <3<3<3<3 ";
 let i=0;
 function typeText(){
   const el=document.getElementById("typing");
@@ -237,24 +316,52 @@ function reveal(){
   document.getElementById("secret").style.display="block";
 }
 
-/* HEARTS */
+/* HEART / PETAL / SPARKLE RAIN */
 function heart(){
-  let h=document.createElement("div");
+  const emojis = ["💖","😘","😚","😋"];
+  let h = document.createElement("div");
   h.className="heart";
-  const emojis = ["😘","❤️","😋","😚"];
   h.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(3+Math.random()*3)+"s";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (16 + Math.random()*24) + "px";
+  h.style.animationDuration = (6 + Math.random()*6) + "s";
+  h.style.transform = "rotate(" + (Math.random()*360) + "deg)";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
 }
 setInterval(heart,300);
 
-/* MUSIC (CHROME SAFE) */
-function playMusic(){
-  const music=document.getElementById("bgMusic");
-  music.play();
-}
+/* ENTER KEY TO SUBMIT PASSWORD */
+document.getElementById("pass").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){ check(); }
+});
+// FULLSCREEN PHOTO FUNCTIONALITY
+const galleryImgs = document.querySelectorAll(".gallery img");
+const overlay = document.getElementById("photoOverlay");
+const overlayImg = document.getElementById("overlayImg");
+const closeOverlay = document.getElementById("closeOverlay");
+
+galleryImgs.forEach(img => {
+  img.addEventListener("click", ()=>{
+    overlay.style.display = "flex";
+    overlay.classList.add("show");
+    overlayImg.src = img.src;
+  });
+});
+
+closeOverlay.addEventListener("click", ()=>{
+  overlay.classList.remove("show");
+  setTimeout(()=>overlay.style.display="none", 400); // fade out
+});
+
+// Close overlay if tapped outside the image
+overlay.addEventListener("click", (e)=>{
+  if(e.target === overlay){
+    overlay.classList.remove("show");
+    setTimeout(()=>overlay.style.display="none", 400);
+  }
+});
+
 </script>
 
 </body>
