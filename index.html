@@ -342,6 +342,160 @@
         transform: translateY(0);
       }
     }
+    #loveTimer {
+  margin-top: 20px;
+  font-size: calc(16px + 1.5vw);
+  color: #b13248;
+}
+/* 🌙 MOMENT FREEZE */
+#freezeOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#freezeText {
+  color: white;
+  font-size: clamp(26px, 6vw, 55px);
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  animation: fadeInSlow 2s ease forwards;
+}
+
+@keyframes fadeInSlow {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 🌌 MEMORY WHISPER */
+#whisper {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.25);
+  color: #4a1c2d;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: clamp(14px, 3.5vw, 20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 9998;
+  backdrop-filter: blur(6px);
+}
+/* 🌠 WISH HEART */
+#wishHeart {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  font-size: 40px;
+  cursor: pointer;
+  animation: pulseHeart 2s infinite;
+  z-index: 9999;
+}
+
+@keyframes pulseHeart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* 🌫️ WISH OVERLAY */
+/* 💖 WANDERING HEART */
+/* 🌙 WISH OVERLAY */
+#wishOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+}
+
+#wishBox {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 25px;
+  font-size: 70px;
+  text-align: center;
+  max-width: 80%;
+  animation: wishPop 0.6s ease;
+}
+
+@keyframes wishPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* 💖 WANDERING HEART */
+#wanderHeart {
+  position: fixed;
+  font-size: 90px; /* adjust bigger/smaller here */
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  animation: floatHeart 3s ease-in-out infinite;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(255,77,109,0.6); /* optional glow */
+}
+
+#wanderHeart span {
+  display: block;
+  font-size: 16px; /* adjust size of “click me” */
+  margin-top: -10px;
+  color: #ff4d6d;
+  font-weight: bold;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* 💖 WISH OVERLAY */
+#wishOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+}
+
+#wishBox {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 25px;
+  font-size: 26px;
+  text-align: center;
+  max-width: 80%;
+  animation: wishPop 0.6s ease;
+}
+
+@keyframes wishPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+
   </style>
 </head>
 
@@ -505,9 +659,36 @@
       <img src="jaanu.jpeg" alt="Special moment">
       <p>Haiderr kaa Sabb Kuchhh💖💖</p>
     </div>
-    <button onclick="next(9)">Aakhri baat 💌</button>
+    <button onclick="next(9)">Howw Manyyy Days of uss togetherrr 💌</button>
   </div>
- <div class="section" id="s9"><h1>Mazzayyy darrr</h1></div>
+ <div class="section" id="s9" >
+  <h1>Ourr LOVEEE Timerr 💖💖💖💖</h1> 
+  <p id="loveTimer"></p><br>
+  <p>Wesyy pyaarr to mujhyy pehlyyy hii hogyaa thaa parrr chaleinn humm 21 sep pehlyy confessionn syy startt kartyyy hynnn😚😚😚😚😚</p>
+  <p>Wee havee Surviveddd X Fightsss 😂😂😂😂😂😂😂</p>
+  <button onclick="freezeMoment()">Ek pal ruk jao 🌙</button><br>
+  <button onclick="next(10)">Myyy Prayersss forr Youuu🌙 💌</button>
+</div> 
+<div id="freezeOverlay">
+  <div id="freezeText">
+    In this moment… it’s always been you 🤍
+  </div>
+</div>
+<div id="wishOverlay">
+  <div id="wishBox"></div>
+</div>
+<!-- FINAL PRAYERS -->
+<div class="section" id="s10">
+  <h1>Myyy Prayersss forrr Youuuuu 🌙✨</h1>
+  <p style="font-size:26px">
+    May your every day be filled with love and joy Jannnahhhhhhhhh💖😚<br>
+    May all your dreams come true Gurriyaa🌙 💖<br>
+    May we always laugh together Jaannnn🌸<br>
+    And may our hearts stay forever connected 💞
+  </p>
+  <button onclick="endExperience()">Ameeeen 💖💖💖</button>
+</div>
+
 
 
 
@@ -702,10 +883,137 @@
         setTimeout(() => c.remove(), 1500);
       }
     }
+   /* 🕰️ LOVE TIMER */
+const startDate = new Date("2024-09-21T00:00:00"); // 👈 change date if needed
+
+setInterval(() => {
+  const now = new Date();
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  const timer = document.getElementById("loveTimer");
+  if (timer) {
+    timer.innerText =
+      `I have loved you for ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds 💖`;
+  }
+}, 1000);
+
+/* 🌙 MOMENT FREEZE */
+function freezeMoment() {
+  const overlay = document.getElementById("freezeOverlay");
+  overlay.style.display = "flex";
+
+  setTimeout(() => {
+    overlay.addEventListener("click", unfreezeMoment, { once: true });
+  }, 500);
+}
+
+function unfreezeMoment() {
+  const overlay = document.getElementById("freezeOverlay");
+  overlay.style.display = "none";
+}
+/* 🌌 MEMORY WHISPER */
+const whispers = [
+  "I’m proud of you 🌸",
+  "You’re doing so well🌸🌸🫶",
+  "You mean more than you know 💖",
+  "I’m always with you 🌙"
+];
+
+function showWhisper() {
+  const w = document.getElementById("whisper");
+  if (!w) return;
+
+  w.innerText = whispers[Math.floor(Math.random() * whispers.length)];
+  w.style.opacity = "1";
+
+  setTimeout(() => {
+    w.style.opacity = "0";
+  }, 4000);
+
+  const nextTime = 2000 + Math.random() * 10000; // 20–30 sec
+  setTimeout(showWhisper, nextTime);
+}
+
+// start after first delay
+setTimeout(showWhisper, 15000);
+
+/* 🌠 WISH HEART */
+/* 💖 WANDERING HEART */
+const wishes = [
+  "I wish to always protect your smile 🤍",
+  "I wish you never feel alone 🌙",
+  "I wish to be your peace 💖",
+  "I wish to grow old laughing with you 🌸",
+  "I wish you feel loved every single day🌸🌸 "
+];
+
+function spawnWanderHeart() {
+  const heart = document.getElementById("wanderHeart");
+  if (!heart) return;
+
+  const padding = 80;
+  const x = Math.random() * (window.innerWidth - padding * 2) + padding;
+  const y = Math.random() * (window.innerHeight - padding * 2) + padding;
+
+  heart.style.left = x + "px";
+  heart.style.top = y + "px";
+  heart.style.display = "block";
+
+  // disappear if ignored
+  setTimeout(() => {
+    heart.style.display = "none";
+  }, 8000);
+
+  // spawn again later
+  const next = 20000 + Math.random() * 15000;
+  setTimeout(spawnWanderHeart, next);
+}
+
+// start
+setTimeout(spawnWanderHeart, 10000);
+
+/* 💖 WISH OVERLAY (same as before) */
+function openWish() {
+  const overlay = document.getElementById("wishOverlay");
+  const box = document.getElementById("wishBox");
+
+  box.innerText = wishes[Math.floor(Math.random() * wishes.length)];
+  overlay.style.display = "flex";
+  document.getElementById("wanderHeart").style.display = "none";
+
+  overlay.onclick = () => {
+    overlay.style.display = "none";
+  };
+}
+/* 🌸 END EXPERIENCE FUNCTION */
+function endExperience() {
+  // hide all sections
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  
+  // show a final thank you / goodbye message
+  const body = document.body;
+  body.innerHTML = `
+    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; font-family:'Dancing Script', cursive; color:rgb(177, 50, 72); background:linear-gradient(rgba(255,182,193,0.8), rgba(255,182,193,0.8));">
+      <h1 style="font-size:4vw;">Thank You 💖🌙</h1>
+      <p style="font-size:2vw;">For being the most special part of my life 😚</p>
+      <p style="font-size:1.5vw;">I love you endlessly 💞</p>
+    </div>
+  `;
+  
+  // stop background hearts/confetti if you want
+  clearInterval(window.heartInterval);
+}
 
 
   </script>
  <div id="forever"><h1>I choose you. Always.</h1></div>
+ <div id="whisper"></div>
+<div id="wanderHeart" onclick="openWish()">💖<span>click me</span></div>
 
 </body>
 
